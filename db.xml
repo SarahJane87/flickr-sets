@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+	<table name="btFlickrBlock">
+		<field name="bID" type="I">
+			<key />
+			<unsigned />
+		</field>
+		<field name="userID" type="X2">
+			<default value="" />
+		</field>
+	</table>
+
+	<table name="btFlickrSetInfo">
+    <field name="fID" type="I">
+			<key />
+			<unsigned />
+      <autoincrement />
+    </field>
+		<field name="bID" type="I"></field>
+		<field name="setID" type="C" size="50"></field>
+		<field name="setTitle" type="X2"></field>
+		<field name="setThumbSRC" type="X2"></field>
+	</table>
+  
+	<table name="btFlickrPhotos">
+    <field name="fID" type="I">
+			<key />
+			<unsigned />
+      <autoincrement />
+    </field>
+		<field name="bID" type="I"></field>
+		<field name="photoID" type="C" size="50"></field>
+		<field name="photoSRC" type="X2"></field>
+		<field name="photoDesc" type="X2"></field>
+		<field name="setID" type="C" size="50"></field>
+	</table>
+</schema>
