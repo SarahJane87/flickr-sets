@@ -23,7 +23,7 @@
   #ccm-block-form .ui-dialog-buttonset {
     float: none;
   }
-  #userID, label[for="userID"], #setTitles {
+  #userID, label[for="userID"] {
     display: none;
   }
   .ccm-ui input[type=checkbox] {
@@ -66,11 +66,7 @@
       <?php echo $form->label('setIDs['.$setTitle.']', $setTitle) ?>
       <div class='clear'></div>
     </p>
-  <?php } 
-  $setTitles = substr_replace($setTitles, "", -1);
-  ?>
-  
-  <input id="setTitles" type="text" name="setTitles" value="<?php echo $setTitles ?>" class="ccm-input-text">
+  <?php } ?>
   
   <div id="flickrSets"></div>
   
@@ -78,8 +74,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  
-    var setTitles = "";
     
     var addBtn = $('.ccm-buttons .btn.primary');
     var onclick = addBtn.attr("href");
@@ -91,6 +85,15 @@ $(document).ready(function() {
     
     $('.ccm-input-checkbox').change(function() {
       var checkedBoxes = $(".ccm-input-checkbox").filter(':checked');
+      if (checkedBoxes.length > 0){
+        addBtn.attr("href", onclick);
+      } else {
+        addBtn.attr("href", "javascript:void(0)");
+      }
+    });
+     
+});
+</script>checkbox").filter(':checked');
       if (checkedBoxes.length > 0){
         
         var setTitles = "";

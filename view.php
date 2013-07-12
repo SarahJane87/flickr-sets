@@ -4,7 +4,7 @@
   foreach ($photoSetsInfo as $set) { ?>
     <div class="flickrSet">
       <img src="<?php echo $set[setThumbSRC] ?>"/>
-      <p class="button-link"><a class="openFlickrSet" href="javascript:void(0)" data-set_id="set_<?php echo $set[setID] ?>">View photos from <?php echo $set[setTitle] ?></a></p>
+      <p class="button-link"><a class="openFlickrSet" href="javascript:void(0)" data-set_id="set_<?php echo $set[setID] ?>">View photos from <?php echo str_replace("Genius Perfect Toast Tour - ","",$set[setTitle]) ?></a></p>
     </div>
 <?php } ?>
 
@@ -18,7 +18,11 @@
       $photoSRCs = $controller->getImagesData($setPhotos);
       $photoSRCs = array_values($photoSRCs); ?>
       var setID = 'set_<?php echo $setID ?>';
-      photoSRCBySet[setID] = JSON.parse('<?php echo json_encode($photoSRCs) ?>');
+      photoSRCBySet[setID] = <?php echo json_encode($photoSRCs) ?>;
+      var arr = <?php echo json_encode($photoSRCs) ?>;
+      photoSRCBySet[setID] = $.map( arr, function(val, i) {
+        return [[val[0],htmlDecode(val[1])]];
+      });
   <?php } ?>
   
   $('.openFlickrSet').click(function() {
@@ -33,5 +37,11 @@
     });
     
   });
+  
+  function htmlDecode(input){
+    var e = document.createElement('div');
+    e.innerHTML = input;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+  }
   
 </script>

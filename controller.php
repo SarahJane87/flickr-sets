@@ -97,6 +97,14 @@ class FlickrSetsBlockController extends BlockController {
     return $filtered;
   }
   
+  function phpFilter_by_key($array, $member, $value) {
+    $filtered = array();
+    foreach ($array as $k => $v) {
+      if($v->$member == $value) $filtered[$k] = $v;
+    }
+    return array_values($filtered);
+  }
+  
   function getImagesData($arr) {
     $src = function($a) {
        return array($a[photoSRC], htmlentities($a[photoDesc], ENT_QUOTES));
@@ -137,14 +145,20 @@ class FlickrSetsBlockController extends BlockController {
     //Get set IDs
     $setIDs = array_values($data['setIDs']);
     
-    //Get set titles
-    $setTitlesString = trim($data['setTitles']);
-    $setTitles = explode(',', $setTitlesString);
+    //Get set info for user
+    $setInfo = $this->getSetInfo($args['userID']);
+    
+    //xoxo Get set titles
+    //xoxo $setTitlesString = trim($data['setTitles']);
+    //xoxo $setTitles = explode(',', $setTitlesString);
     
     for ($i = 0; $i < count($setIDs); $i++) {
       
       $setID = $setIDs[$i];
-      $setTitle = $setTitles[$i];
+      
+      $set = $this->phpFilter_by_key($setInfo, id, $setID);
+      $setTitle = $set[0]->title->_content;
+      //xoxo $setTitle = $setTitles[$i];
       
       //Get new set photos
       $setPhotos = $this->getSetPhotos($setID);

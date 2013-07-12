@@ -22,9 +22,6 @@
   #ccm-block-form .ui-dialog-buttonset {
     float: none;
   }
-  #setTitles {
-    display: none;
-  }
   .ccm-ui input[type=checkbox] {
     float: left;
     cursor: pointer;
@@ -53,8 +50,6 @@
   </div>
   
   <div id="flickrSets"></div>
-  
-  <input id="setTitles" type="text" name="setTitles" value="" class="ccm-input-text" />
   
   <a id="getFlickrSets" href="javascript:void(0)" class="ccm-button-right btn primary">Get Sets</a>
   
@@ -100,16 +95,6 @@ $(document).ready(function() {
             $('.ccm-input-checkbox').change(function() {
               var checkedBoxes = $(".ccm-input-checkbox").filter(':checked');
               if (checkedBoxes.length > 0){
-                
-                var setTitles = "";
-                
-                checkedBoxes.each(function(index, el) {
-                  setTitles = setTitles + $(el).attr("data-title") + ",";
-                });
-                setTitles = setTitles.slice(0, -1);
-                
-                $('#setTitles').val(setTitles);
-                
                 addBtn.attr("onclick", onclick);
               } else {
                 addBtn.removeAttr("onclick");
