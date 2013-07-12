@@ -10,9 +10,8 @@ class FlickrSetsBlockController extends BlockController {
   
   protected $btExportTables = array('btFlickrBlock', 'btFlickrSetInfo', 'btFlickrPhotos');
   
-  //Need to change API key. Currently key is for an uncommercial app.
-  //Create an app here: http://www.flickr.com/services/apps/create/apply
-  public $api_key = "604fbee2e687131cfa3cb67aae0d6228";
+  //Create an app here to get API key: http://www.flickr.com/services/apps/create/apply
+  public $api_key = "API_KEY";
   
 	public function getBlockTypeName() {
 		return t('Flickr Sets');
